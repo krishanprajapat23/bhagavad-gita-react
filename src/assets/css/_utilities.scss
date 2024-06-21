@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
 
-$primary-font: "Poppins", sans-serif;
+$primary-font: "Poppins", Helvetica, sans-serif;
 $themeClr: #ff7350;
 $secClr:#233d63;
 $dark: #101828;
@@ -8,14 +8,10 @@ $black: #000;
 $fadeClr: #a2a5af;
 $paraClr:#677286;
 $successClr: #25d366;
-$greenClr: #25cc88;
 $dangerClr: #ff3333;
-$redShade: #f25a43;
-$redShadeDark: #c53c20;
 $white: #fff;
 $grayBg: #a9a9a9;
 $lightWhiteClr: #f9f9f9;
-$themeFadeClr: #e8e8e8;
 
 html {
   scroll-behavior: smooth;
@@ -25,6 +21,10 @@ html {
 ::selection {
   background-color: $themeClr;
   color: $white;
+}
+
+pre{
+  white-space:pre-wrap;
 }
 
 .fade-clr {

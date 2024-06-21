@@ -7,26 +7,26 @@ const fetchChapters = async () => {
     console.log(response.data);
     return response.data;
   } catch (error) {
-    throw new Error('Failed to fetch chapters.');
+    throw new Error('Failed to fetch all chapters.');
   }
 };
 
-const fetchShlokas = async (chapterNumber) => {
+const fetchSpecificChapter = async (chapterNumber) => {
+    try {
+      const response = await axios.get(`${API_URL}/chapter/${chapterNumber}`);
+      return response.data;
+    } catch (error) {
+      throw new Error('Failed to fetch Chapter.');
+    }
+};
+
+const fetchSpecificShlok = async (chapter, shlok) => {
   try {
-    const response = await axios.get(`${API_URL}/chapter/${chapterNumber}/shlok`);
+    const response = await axios.get(`${API_URL}/slok/${chapter}/${shlok}`);
     return response.data;
   } catch (error) {
-    throw new Error('Failed to fetch shlokas.');
+    throw new Error('Failed to fetch shlok.');
   }
 };
 
-const fetchVerse = async (chapter, verse) => {
-  try {
-    const response = await axios.get(`${API_URL}/chapters/${chapter}/verse/${verse}`);
-    return response.data;
-  } catch (error) {
-    throw new Error('Failed to fetch verse.');
-  }
-};
-
-export {fetchChapters, fetchShlokas, fetchVerse};
+export {fetchChapters, fetchSpecificChapter, fetchSpecificShlok};

@@ -11,59 +11,64 @@ body {
     line-height: 1.5;
     width: 100%;
     height: 100%;
-    user-select: none;
+    word-break: keep-all;
 }
 
-.btn, input, textarea, select{
+.btn,
+input,
+textarea,
+select {
     box-shadow: none !important;
 }
 
-.form-control:focus{
+.form-control:focus {
     border-color: $themeClr;
 }
 
-header{
+header {
     padding: 2rem 0;
     background: $white;
-    &.scrolled{
+    &.scrolled {
         box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
     }
 
-    .input-group{
+    .input-group {
         max-width: 500px;
         margin-left: auto;
         margin-right: auto;
     }
 }
 
-.chapter-list{
+.chapter-list {
     padding: 2rem 0;
 }
 
-.card-header{
+.card {
+    background-color: $white;
+    border-radius: 1.25rem 0 1.25rem 0;
+    box-shadow: 0 0 40px rgba(82, 85, 90, 0.1);
+    border: 0;
+    transition: all 0.3s;
+}
+
+.card-header {
     background-color: transparent;
 }
 
-.card-footer, .card-header{
+.card-footer,
+.card-header {
     padding: 0.5rem 1.25rem;
 }
 
-.card-body{
+.card-body {
     padding: 1.5rem;
 }
-
-
 
 .card-col {
     .card {
         height: 100%;
-        background-color: $white;
-        border-radius: 1.25rem 0 1.25rem 0;
-        box-shadow: 0 0 40px rgba(82, 85, 90, .1);
-        border: 0;
-        transition: all 0.3s;
         cursor: pointer;
-        &::after{
+        &::after {
             content: "";
             position: absolute;
             width: 100%;
@@ -72,14 +77,14 @@ header{
             bottom: 0;
             left: 0;
             transform-origin: center;
-            transition: .3s;
+            transition: 0.3s;
             transform: scale(0);
         }
-        .card-content{
+        .card-content {
             text-align: center;
         }
 
-        .ch-no{
+        .ch-no {
             @extend .flex-centered;
             margin-inline: auto;
             color: $secClr;
@@ -88,13 +93,13 @@ header{
             height: 100px;
             line-height: 100px;
             margin-bottom: 1.75rem;
-            background-color: rgba(246, 107, 93, .1);
+            background-color: rgba(246, 107, 93, 0.1);
             border-radius: 50%;
             padding-top: 1rem;
             font-size: 1.75rem;
             font-weight: bold;
             transition: all 0.3s;
-            &::after{
+            &::after {
                 position: absolute;
                 content: "";
                 left: 50%;
@@ -107,26 +112,50 @@ header{
             }
         }
 
-        .card-title{
+        .card-title {
             color: $secClr;
             font-size: 1.25rem;
             font-weight: 700;
             margin-bottom: 1.5rem;
             text-transform: capitalize;
-            transition: .3s;
+            transition: 0.3s;
         }
-        &:hover{
+        &:hover {
             border-radius: 0;
-            &::after{
+            &::after {
                 transform: scale(1);
             }
-            .card-title{
+            .card-title {
                 color: $themeClr;
             }
-            .ch-no{
+            .ch-no {
                 background-color: $themeClr;
                 color: $white;
             }
         }
     }
+}
+
+.text {
+    font-size: 0.875rem;
+    color: $dark;
+}
+
+.title-wrapper {
+    padding: 1rem;
+    background-color: $secClr;
+    .card-title {
+        color: $white;
+        text-transform: capitalize;
+    }
+    &.bg-warning {
+        .card-title {
+            color: $dark;
+        }
+    }
+}
+
+.shlok {
+    font-family: cursive;
+    color: $themeClr;
 }

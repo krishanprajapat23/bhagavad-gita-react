@@ -1,34 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { fetchChapters, fetchShlokas, fetchVerse } from "./api";
-import axios from "axios";
+import { fetchChapters, fetchSpecificChapter, fetchSpecificShlok } from "./api";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ChapterCard from "./components/ChapterCard";
+import Loader from "./components/Loader";
 import Header from "./components/Header";
-import Shlokas from "./components/Shlokas";
+import Chapters from "./components/Chapters";
+import Shlok from "./components/Shlok";
 
 const App = () => {
   const [chapters, setChapters] = useState([]);
-  const [shlokas, setShlokas] = useState([]);
+  const [shlok, setShlok] = useState([]);
   const [selectedChapter, setSelectedChapter] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const API_URL = "https://bhagavadgitaapi.in";
-
-  // useEffect(() => {
-  //   setLoading(true);
-  //   axios.get(`${API_URL}/chapters`)
-  //     .then((response) => {
-  //       setChapters(response.data);
-  //       setLoading(false);
-  //     })
-  //     .catch((err) => {
-  //       setError('Failed to fetch chapters.');
-  //       toast.error(error)
-  //       setLoading(false);
-  //     });
-  // }, []);
 
   useEffect(() => {
     loadChapters();
@@ -50,8 +35,8 @@ const App = () => {
   const handleChapterClick = async (chapterNumber) => {
     setLoading(true);
     try {
-      const data = await fetchShlokas(chapterNumber);
-      setShlokas(data);
+      const data = await fetchSpecificChapter(chapterNumber);
+      setShlok(data);
       setSelectedChapter(chapterNumber);
     } catch (error) {
       setError(error.message);
@@ -61,12 +46,14 @@ const App = () => {
     }
   };
 
-  const handleSearch = async (chapter, verse) => {
+  const handleSearch = async (chapter, shlok) => {
     setLoading(true);
     try {
-      const data = await fetchVerse(chapter, verse);
-      setShlokas([data]);
+      const data = await fetchSpecificShlok(chapter, shlok);
+      // console.log(data);
+      setShlok(data);
       setSelectedChapter(chapter);
+      console.log(selectedChapter);
     } catch (error) {
       setError(error.message);
       toast.error(error.message);
@@ -74,24 +61,14 @@ const App = () => {
       setLoading(false);
     }
   };
-
   return (
     <>
       <ToastContainer theme="colored" />
       <Header onSearch={handleSearch} toast={toast} />
+      { loading && <Loader /> }
       <div className="container-lg container-fluid">
-        <div className="chapter-list">
-          <div className="row gy-4">
-            {chapters.map((chapter) => (
-              <ChapterCard
-                key={chapter.chapter_number}
-                chapter={chapter}
-                onClick={handleChapterClick}
-              />
-            ))}
-          </div>
-        </div>
-        {selectedChapter && <Shlokas shlokas={shlokas} />}
+      <Chapters chapters={chapters} handleChapterClick={handleChapterClick}/>
+        {selectedChapter && <Shlok shlok={shlok} />}
       </div>
     </>
   );
