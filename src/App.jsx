@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import ChapterCard from './components/ChapterCard';
-import Header from './components/Header';
-import Shlokas from './components/Shlokas';
+import React, { useState, useEffect } from "react";
+import { fetchChapters, fetchShlokas, fetchVerse } from "./api";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import ChapterCard from "./components/ChapterCard";
+import Header from "./components/Header";
+import Shlokas from "./components/Shlokas";
 
 const App = () => {
   const [chapters, setChapters] = useState([]);
@@ -13,46 +14,80 @@ const App = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const API_URL = 'https://bhagavadgitaapi.in';
+  const API_URL = "https://bhagavadgitaapi.in";
 
+  // useEffect(() => {
+  //   setLoading(true);
+  //   axios.get(`${API_URL}/chapters`)
+  //     .then((response) => {
+  //       setChapters(response.data);
+  //       setLoading(false);
+  //     })
+  //     .catch((err) => {
+  //       setError('Failed to fetch chapters.');
+  //       toast.error(error)
+  //       setLoading(false);
+  //     });
+  // }, []);
 
   useEffect(() => {
-    setLoading(true);
-    axios.get(`${API_URL}/chapters`)
-      .then((response) => {
-        setChapters(response.data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError('Failed to fetch chapters.');
-        toast.error(error)
-        setLoading(false);
-      });
+    loadChapters();
   }, []);
 
-  const handleChapterClick = (chapterNumber) => {
-    axios.get(`https://bhagavadgitaapi.in/chapter/${chapterNumber}/shlok`).then((response) => {
-      setShlokas(response.data);
-      setSelectedChapter(chapterNumber);
-    });
+  const loadChapters = async () => {
+    setLoading(true);
+    try {
+      const data = await fetchChapters();
+      setChapters(data);
+    } catch (error) {
+      setError(error.message);
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleSearch = (chapter, verse) => {
-    axios.get(`https://bhagavadgitaapi.in/chapters/${chapter}/verse/${verse}`).then((response) => {
-      setShlokas([response.data]);
+  const handleChapterClick = async (chapterNumber) => {
+    setLoading(true);
+    try {
+      const data = await fetchShlokas(chapterNumber);
+      setShlokas(data);
+      setSelectedChapter(chapterNumber);
+    } catch (error) {
+      setError(error.message);
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSearch = async (chapter, verse) => {
+    setLoading(true);
+    try {
+      const data = await fetchVerse(chapter, verse);
+      setShlokas([data]);
       setSelectedChapter(chapter);
-    });
+    } catch (error) {
+      setError(error.message);
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <>
-      <ToastContainer theme="colored"/>
-      <Header onSearch={handleSearch} toast={toast}/>
+      <ToastContainer theme="colored" />
+      <Header onSearch={handleSearch} toast={toast} />
       <div className="container-lg container-fluid">
         <div className="chapter-list">
           <div className="row gy-4">
             {chapters.map((chapter) => (
-              <ChapterCard key={chapter.chapter_number} chapter={chapter} onClick={handleChapterClick} />
+              <ChapterCard
+                key={chapter.chapter_number}
+                chapter={chapter}
+                onClick={handleChapterClick}
+              />
             ))}
           </div>
         </div>
