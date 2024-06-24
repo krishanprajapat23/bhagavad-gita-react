@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Shlok = ({ shlok }) => {
   const {_id, chapter, verse, slok, transliteration, tej, purohit, rams, raman, sankar, } = shlok;
   console.log(shlok);
@@ -12,12 +10,12 @@ const Shlok = ({ shlok }) => {
               <h5 className="card-title mb-0">Chapter {chapter} : Verse {verse}</h5>
             </div>
             <div className="shlok-text">
-              <pre className="shlok fs-5 fw-bold">
+              <p className="shlok prewrap fs-5 fw-bold">
                 {slok}
-              </pre>
-              <pre className="text-muted small slok-transliteration">
+              </p>
+              <p className="text-muted prewrap small slok-transliteration">
                 {transliteration}
-              </pre>
+              </p>
             </div>
           </div>
           <div className="body-part">
@@ -26,36 +24,39 @@ const Shlok = ({ shlok }) => {
                 <h5 className="card-title mb-0">Translation</h5>
               </div>
               <div className='p-2 text fw-semibold'>
-                <span className='badge bg-warning text-dark'>{_id} </span> {tej?.ht}
-                <div className='mt-2'>{purohit.et}</div>
+                <span className='badge prewrap bg-warning text-dark'>{_id} </span> {tej?.ht}
+                <div className='mt-2 prewrap'>{purohit?.et}</div>
               </div>
             </div>
             <div className="body-part-sec mb-4">
               <div className="title-wrapper bg-warning mb-3 text-center">
                 <h5 className="card-title mb-0">Commentary</h5>
               </div>
-              <div className='p-2 text fw-semibold'>
                 {
-                  rams.hc && (
-                    <>
+                  rams && (!rams.hc.includes("did not comment")) && (
+                    <div className='p-2 text fw-semibold'>
                       <span className='badge bg-warning text-dark'>{rams.author} </span>
-                      <div className='mt-2'>{rams.hc}</div>
-                    </>
+                      <p className='mt-2 prewrap'>{rams.hc}</p>
+                    </div>
                   )
                 }
-              </div>
-              <div className='p-2 text fw-semibold'>
                 {
-                  rams.hc && (
-                    <>
-                      <span className='badge bg-warning text-dark'>{rams.author} </span>
-                      <pre className='mt-2'>{rams.hc}</pre>
-                    </>
+                  raman && (!raman.et.includes("did not comment")) &&  (
+                    <div className='p-2 text fw-semibold'>
+                      <span className='badge bg-warning text-dark'>{raman.author} </span>
+                      <p className='mt-2 prewrap'>{raman.et}</p>
+                    </div>
                   )
                 }
-              </div>
+                {
+                  sankar && (!sankar.ht.includes("did not comment")) && (
+                    <div className='p-2 text fw-semibold'>
+                      <span className='badge bg-warning text-dark'>{sankar.author} </span>
+                      <p className='mt-2 prewrap'>{sankar.ht}</p>
+                    </div>
+                  )
+                }
             </div>
-            
           </div>
         </div>
       </div>

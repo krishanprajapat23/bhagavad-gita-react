@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { fetchChapters, fetchSpecificChapter, fetchSpecificShlok } from "./api";
+import { fetchChapters, fetchSpecificShlok, fetchChapter } from "./api";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "./components/Loader";
 import Header from "./components/Header";
 import Chapters from "./components/Chapters";
+import ChapterCard from "./components/ChapterCard";
 import Shlok from "./components/Shlok";
 
 const App = () => {
@@ -13,7 +14,7 @@ const App = () => {
   const [selectedChapter, setSelectedChapter] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
+  const [selectedVerse, setSelectedVerse] = useState("1");
 
   useEffect(() => {
     loadChapters();
@@ -25,8 +26,7 @@ const App = () => {
       const data = await fetchChapters();
       setChapters(data);
     } catch (error) {
-      setError(error.message);
-      toast.error(error.message);
+      handleFetchError(error);
     } finally {
       setLoading(false);
     }
@@ -35,12 +35,15 @@ const App = () => {
   const handleChapterClick = async (chapterNumber) => {
     setLoading(true);
     try {
-      const data = await fetchSpecificChapter(chapterNumber);
-      setShlok(data);
-      setSelectedChapter(chapterNumber);
+      // Fetch detailed chapter information
+      const chapterInfo = await fetchChapter(chapterNumber);
+      setSelectedChapter({ chapterNumber, data: chapterInfo });
+
+      // Fetch first shloka of the chapter
+      const shlokData = await fetchSpecificShlok(chapterNumber, "1");
+      setShlok(shlokData);
     } catch (error) {
-      setError(error.message);
-      toast.error(error.message);
+      handleFetchError(error);
     } finally {
       setLoading(false);
     }
@@ -50,25 +53,48 @@ const App = () => {
     setLoading(true);
     try {
       const data = await fetchSpecificShlok(chapter, shlok);
-      // console.log(data);
       setShlok(data);
-      setSelectedChapter(chapter);
-      console.log(selectedChapter);
+      setSelectedVerse(shlok); // Update selectedVerse state
     } catch (error) {
-      setError(error.message);
-      toast.error(error.message);
+      handleFetchError(error);
     } finally {
       setLoading(false);
     }
   };
+
+  const handleChange = (e) => {
+    setSelectedVerse(e.target.value);
+    if (selectedChapter) {
+      handleSearch(selectedChapter.chapterNumber, e.target.value);
+    }
+  };
+
+  const handleFetchError = (error) => {
+    setError(error.message);
+    toast.error(error.message);
+    setLoading(false);
+  };
+
   return (
     <>
       <ToastContainer theme="colored" />
-      <Header onSearch={handleSearch} toast={toast} />
-      { loading && <Loader /> }
+      <Header />
+      {loading && <Loader />}
       <div className="container-lg container-fluid">
-      <Chapters chapters={chapters} handleChapterClick={handleChapterClick}/>
-        {selectedChapter && <Shlok shlok={shlok} />}
+        {selectedChapter ? (
+          <ChapterCard
+            selectedChapter={selectedChapter.chapterNumber}
+            chapter={selectedChapter.data}
+            selectedVerse={selectedVerse}
+            handleChange={handleChange}
+          />
+        ) : (
+          <Chapters
+            chapters={chapters}
+            handleChapterClick={handleChapterClick}
+          />
+        )}
+        {selectedChapter && shlok && <Shlok shlok={shlok} />}
       </div>
     </>
   );
