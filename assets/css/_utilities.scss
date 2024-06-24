@@ -1,0 +1,184 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
+
+$primary-font: "Poppins", Helvetica, sans-serif;
+$themeClr: #ff7350;
+$secClr:#233d63;
+$dark: #101828;
+$black: #000;
+$fadeClr: #a2a5af;
+$paraClr:#677286;
+$successClr: #25d366;
+$dangerClr: #ff3333;
+$white: #fff;
+$grayBg: #a9a9a9;
+$lightWhiteClr: #f9f9f9;
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: $themeClr;
+  color: $white;
+}
+
+pre, .prewrap{
+  white-space:pre-wrap;
+}
+
+.fade-clr {
+  color: $fadeClr;
+}
+
+html,
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  -webkit-font-smoothing: antialiased;
+  &:not(i) {
+    font-family: $primary-font;
+  }
+}
+
+::placeholder {
+  color: $fadeClr;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+html,
+body {
+  ::-webkit-scrollbar-track {
+    border: none;
+    padding: 2px 0;
+    background-color: #fff;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    background-color: #c7c7c7;
+  }
+}
+
+.xs {
+  font-size: 10px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.cursor-auto {
+  cursor: auto;
+}
+
+.text-success {
+  color: $successClr !important;
+}
+
+.text-danger {
+  color: $dangerClr !important;
+}
+
+.bg-success {
+  background-color: $successClr !important;
+}
+
+.bg-danger {
+  background-color: $dangerClr !important;
+}
+
+.fw-semibold {
+  font-weight: 600;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  color: $secClr;
+  letter-spacing: 0.05em;
+  word-wrap: break-word;
+}
+
+p {
+  color: $fadeClr;
+  word-wrap: break-word;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.truncate_two {
+  @extend .truncate;
+  -webkit-line-clamp: 2;
+}
+
+.flex-centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.noselect {
+  user-select: none;
+}
+
+.pointer-no {
+  pointer-events: none;
+}
+
+.pointer-yes {
+  pointer-events: all;
+}
+
+.desc {
+  color: $fadeClr;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.dropdown-toggle.no-arrow {
+  &::after {
+    content: initial;
+  }
+}
+
+.list-styled {
+  list-style: disc !important;
+  li {
+    list-style: disc;
+  }
+}
+
+
+.btn-primary{
+  background-color: $themeClr;
+  color: $white;
+  border-color: $themeClr;
+  &:hover, &:focus{
+    background-color: rgba($themeClr, 0.875);
+    color: $white;
+    border-color: $themeClr;
+  }
+}
+
+.card-text{
+  font-size: 0.875rem;
+}

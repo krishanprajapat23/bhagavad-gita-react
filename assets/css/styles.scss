@@ -1,0 +1,161 @@
+@import "_utilities";
+
+body {
+    font-family: $primary-font;
+    letter-spacing: 0.0275em;
+    font-size: 14px;
+    font-weight: 500;
+    color: $paraClr;
+    background-color: $white;
+    overflow-x: hidden;
+    line-height: 1.5;
+    width: 100%;
+    height: 100%;
+    word-break: keep-all;
+}
+
+.btn,
+input,
+textarea,
+select {
+    box-shadow: none !important;
+}
+
+.form-control:focus {
+    border-color: $themeClr;
+}
+
+header {
+    padding: 2rem 0;
+    background: $white;
+    &.scrolled {
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    }
+
+    .input-group {
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.chapter-list {
+    padding: 2rem 0;
+}
+
+.card {
+    background-color: $white;
+    border-radius: 1.25rem 0 1.25rem 0;
+    box-shadow: 0 0 40px rgba(82, 85, 90, 0.1);
+    border: 0;
+    transition: all 0.3s;
+}
+
+.card-header {
+    background-color: transparent;
+}
+
+.card-footer,
+.card-header {
+    padding: 0.5rem 1.25rem;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.card-col {
+    .card {
+        height: 100%;
+        cursor: pointer;
+        &::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: $themeClr;
+            bottom: 0;
+            left: 0;
+            transform-origin: center;
+            transition: 0.3s;
+            transform: scale(0);
+        }
+        .card-content {
+            text-align: center;
+        }
+
+        .ch-no {
+            @extend .flex-centered;
+            margin-inline: auto;
+            color: $secClr;
+            position: relative;
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            margin-bottom: 1.75rem;
+            background-color: rgba(246, 107, 93, 0.1);
+            border-radius: 50%;
+            padding-top: 1rem;
+            font-size: 1.75rem;
+            font-weight: bold;
+            transition: all 0.3s;
+            &::after {
+                position: absolute;
+                content: "";
+                left: 50%;
+                top: -8px;
+                width: 50px;
+                height: 25px;
+                border-radius: 50%;
+                background-color: $white;
+                transform: translateX(-50%);
+            }
+        }
+
+        .card-title {
+            color: $secClr;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-transform: capitalize;
+            transition: 0.3s;
+        }
+        &:hover {
+            border-radius: 0;
+            &::after {
+                transform: scale(1);
+            }
+            .card-title {
+                color: $themeClr;
+            }
+            .ch-no {
+                background-color: $themeClr;
+                color: $white;
+            }
+        }
+    }
+}
+
+.text {
+    font-size: 0.875rem;
+    color: $dark;
+}
+
+.title-wrapper {
+    padding: 1rem;
+    background-color: $secClr;
+    .card-title {
+        color: $white;
+        text-transform: capitalize;
+    }
+    &.bg-warning {
+        .card-title {
+            color: $dark;
+        }
+    }
+}
+
+.shlok {
+    font-family: cursive;
+    color: $themeClr;
+}
