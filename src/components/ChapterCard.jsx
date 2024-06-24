@@ -1,7 +1,7 @@
 // src/components/ChapterCard.jsx
 import VerseSelector from './VerseSelector';
 
-const ChapterCard = ({ chapter, handleChapterClick, selectedChapter, selectedVerse, handleChange }) => {
+const ChapterCard = ({ chapter, handleChapterClick, selectedChapter, selectedVerse, handleChange, handleBackToChapters }) => {
   const { name, chapter_number, meaning, translation, verses_count, summary } = chapter || {};
 
 
@@ -14,6 +14,9 @@ const ChapterCard = ({ chapter, handleChapterClick, selectedChapter, selectedVer
   return (
     <div className={`${selectedChapter ? 'col-lg-10 mx-auto selected-col' : 'col-xxl-3 col-lg-4 col-sm-6 card-col'}`} onClick={onChapterClick}>
       <article className="card">
+      {
+        selectedChapter && <button className="btn btn-warning ms-auto m-3" onClick={handleBackToChapters}>Back</button>
+      }
         <div className="card-body border-0">
           <div className="card-content">
             {selectedChapter ? (

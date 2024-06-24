@@ -69,6 +69,10 @@ const App = () => {
     }
   };
 
+  const handleBackToChapters = () => {
+    setSelectedChapter(null);
+  };
+
   const handleFetchError = (error) => {
     setError(error.message);
     toast.error(error.message);
@@ -80,13 +84,14 @@ const App = () => {
       <ToastContainer theme="colored" />
       <Header />
       {loading && <Loader />}
-      <div className="container-lg container-fluid">
+      <div className="container-lg container-fluid mt-2">
         {selectedChapter ? (
           <ChapterCard
             selectedChapter={selectedChapter.chapterNumber}
             chapter={selectedChapter.data}
             selectedVerse={selectedVerse}
             handleChange={handleChange}
+            handleBackToChapters={handleBackToChapters}
           />
         ) : (
           <Chapters
@@ -94,7 +99,7 @@ const App = () => {
             handleChapterClick={handleChapterClick}
           />
         )}
-        {shlok && <Shlok shlok={shlok} />}
+        {selectedChapter && shlok && <Shlok shlok={shlok} />}
       </div>
     </>
   );

@@ -26,10 +26,19 @@ select {
 }
 
 header {
-    padding: 2rem 0;
-    background: $white;
+    padding: 1.5rem 0;
+    background: $themeClr;
+    transition: all 0.3s;
+    .text-center img{
+        max-width: 300px;
+        transition: all 0.3s;
+    }
     &.scrolled {
+        padding: 1rem 0;
         box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+        img{
+            max-width: 250px;
+        }
     }
 
     .input-group {
@@ -158,4 +167,7 @@ header {
 .shlok {
     font-family: cursive;
     color: $themeClr;
+    @media(max-width:567px){
+        font-size: 14px !important;
+    }
 }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Logo from '../assets/images/logo.png';
 
 const Header = () => {
   const [scrolling, setScrolling] = useState('');
@@ -23,7 +24,7 @@ const Header = () => {
 
   return (
     <header className={`sticky-top ${scrolling ? 'scrolled' : ''}`}>
-      hey
+      <div className="text-center"><img src={Logo} alt="Bhagavad Gita" className='img-fluid'/></div>
     </header>
   );
 };
