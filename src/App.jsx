@@ -94,7 +94,7 @@ const App = () => {
             handleChapterClick={handleChapterClick}
           />
         )}
-        {selectedChapter && shlok && <Shlok shlok={shlok} />}
+        {shlok && <Shlok shlok={shlok} />}
       </div>
     </>
   );
