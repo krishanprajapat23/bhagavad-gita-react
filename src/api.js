@@ -1,23 +1,27 @@
-import axios from 'axios';
-const API_URL = 'https://bhagavadgitaapi.in';
+import axios from "axios";
+
+const URL = "https://bhagavadgitaapi.in";
+
+const API_URL = `https://cors-anywhere.herokuapp.com/${URL}`;
 
 const fetchChapters = async () => {
   try {
     const response = await axios.get(`${API_URL}/chapters`);
-    console.log(response.data);
     return response.data;
   } catch (error) {
-    throw new Error('Failed to fetch all chapters.');
+    console.error("Error fetching chapters:", error);
+    throw error; // Re-throw the error to handle it in the calling code
   }
 };
 
-const fetchSpecificChapter = async (chapterNumber) => {
-    try {
-      const response = await axios.get(`${API_URL}/chapter/${chapterNumber}`);
-      return response.data;
-    } catch (error) {
-      throw new Error('Failed to fetch Chapter.');
-    }
+const fetchChapter = async (chapter_number) => {
+  try {
+    const response = await axios.get(`${API_URL}/chapter/${chapter_number}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching chapters:", error);
+    throw error; // Re-throw the error to handle it in the calling code
+  }
 };
 
 const fetchSpecificShlok = async (chapter, shlok) => {
@@ -25,8 +29,9 @@ const fetchSpecificShlok = async (chapter, shlok) => {
     const response = await axios.get(`${API_URL}/slok/${chapter}/${shlok}`);
     return response.data;
   } catch (error) {
-    throw new Error('Failed to fetch shlok.');
+    console.error(`Error fetching shlok ${chapter}/${shlok}:`, error);
+    throw error; // Re-throw the error to handle it in the calling code
   }
 };
 
-export {fetchChapters, fetchSpecificChapter, fetchSpecificShlok};
+export { fetchChapters, fetchSpecificShlok,fetchChapter};
