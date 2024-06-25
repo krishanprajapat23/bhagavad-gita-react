@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const VerseSelector = ({ selectedVerse, verses_count, handleChange }) => {
  
-console.log(verses_count);
+// console.log(verses_count);
   // Generate options based on verses_count 
   const options = Array.from({ length: verses_count }, (_, index) => (
     <option key={index + 1} value={index + 1}>{index + 1}</option>
