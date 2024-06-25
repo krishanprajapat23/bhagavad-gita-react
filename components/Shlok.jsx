@@ -1,7 +1,7 @@
 import React from "react";
 const Shlok = React.forwardRef(({ shlok}, ref) => {
+  console.log(shlok);
   const {_id, chapter, verse, slok, transliteration, tej, purohit, rams, raman, sankar, } = shlok;
-
   return (
     <div className="shlok-wrapper my-2 py-3" ref={ref}>
       <div className="card mb-3 shadow-none" key={_id}>
