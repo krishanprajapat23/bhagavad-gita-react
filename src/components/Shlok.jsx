@@ -1,8 +1,9 @@
-const Shlok = ({ shlok }) => {
+import React from "react";
+const Shlok = React.forwardRef(({ shlok}, ref) => {
   const {_id, chapter, verse, slok, transliteration, tej, purohit, rams, raman, sankar, } = shlok;
   // console.log(shlok);
   return (
-    <div className="shlok-wrapper my-2 py-3">
+    <div className="shlok-wrapper my-2 py-3" ref={ref}>
       <div className="card mb-3 shadow-none" key={_id}>
         <div className="card-body">
           <div className="intro-part text-center">
@@ -62,6 +63,6 @@ const Shlok = ({ shlok }) => {
       </div>
     </div>
   );
-};
+});
 
 export default Shlok;
