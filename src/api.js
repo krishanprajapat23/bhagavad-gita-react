@@ -1,8 +1,7 @@
 import axios from "axios";
 
-const URL = "https://bhagavadgitaapi.in";
+const API_URL = "https://bhagavadgitaapi.in";
 
-const API_URL = `https://cors-anywhere.herokuapp.com/${URL}`;
 
 const fetchChapters = async () => {
   try {
@@ -19,7 +18,7 @@ const fetchChapter = async (chapter_number) => {
     const response = await axios.get(`${API_URL}/chapter/${chapter_number}`);
     return response.data;
   } catch (error) {
-    console.error("Error fetching chapters:", error);
+    console.error("Error fetching chapter:", error);
     throw error; // Re-throw the error to handle it in the calling code
   }
 };
