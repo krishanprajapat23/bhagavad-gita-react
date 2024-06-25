@@ -142,7 +142,7 @@ const App = () => {
             <Shlok ref={shlokRef} shlok={shlok} />
             <div className="nav-btn-wrapper d-flex justify-content-between align-items-center p-4 mb-3">
               <button onClick={handlePrevClick} className="btn btn-warning">Previous</button>
-              {currentShlok && <strong>{`${currentShlok}/${verseTotal}`}</strong>}
+              {currentShlok && <small className="border px-2 rounded-pill p-1">{`${currentShlok}/${verseTotal}`}</small>}
               <button onClick={handleNextClick} className="btn btn-warning">Next</button>
             </div>
           </>
