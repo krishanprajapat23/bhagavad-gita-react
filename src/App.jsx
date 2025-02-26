@@ -147,7 +147,7 @@ const App = () => {
             <div className="nav-btn-wrapper d-flex justify-content-between align-items-center p-4 mb-3">
               <button onClick={handlePrevClick} className={`btn btn-warning ${(currentShlok <= 1 ) ? 'disabled' : ''}`}>Previous</button>
               {currentShlok && <small className="border px-2 rounded-pill p-1">{`${currentShlok}/${verseTotal}`}</small>}
-              <button onClick={handleNextClick} className="btn btn-warning">Next</button>
+              <button onClick={handleNextClick} className={`btn btn-warning ${(currentShlok === verseTotal ) ? 'disabled' : ''}`}>Next</button>
             </div>
           </>
         )}
