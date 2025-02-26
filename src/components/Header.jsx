@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Logo from '../assets/images/logo.png';
 
 const Header = () => {
-  const [scrolling, setScrolling] = useState('');
+  const [scrolling, setScrolling] = useState(false);
   const handleScroll = () => {
-    if (window.scrollY > 10) {
+    if (window.scrollY > 50) {
       setScrolling(true);
     } else {
       setScrolling(false);
@@ -19,7 +19,7 @@ const Header = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []); // Empty dependency array ensures this effect runs only once
+  }, [scrolling]); // Empty dependency array ensures this effect runs only once
 
 
   return (

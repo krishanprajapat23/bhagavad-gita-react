@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://bhagavadgitaapi.in";
+const API_URL = "https://vedicscriptures.github.io/";
 
 
 const fetchChapters = async () => {

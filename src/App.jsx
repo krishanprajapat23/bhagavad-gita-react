@@ -21,9 +21,7 @@ const App = () => {
 
   const shlokRef = useRef(null);
 
-  useEffect(() => {
-    loadChapters();
-  }, []);
+
 
   const loadChapters = async () => {
     setLoading(true);
@@ -80,6 +78,7 @@ const App = () => {
 
   const handleBackToChapters = () => {
     setSelectedChapter(null);
+    setSelectedVerse("1"); 
   };
 
   const handlePrevClick = () => {
@@ -117,6 +116,11 @@ const App = () => {
     setLoading(false);
   };
 
+
+  useEffect(() => {
+    loadChapters();
+  }, []);
+
   return (
     <>
       <ToastContainer theme="colored" />
@@ -141,7 +145,7 @@ const App = () => {
           <>
             <Shlok ref={shlokRef} shlok={shlok} />
             <div className="nav-btn-wrapper d-flex justify-content-between align-items-center p-4 mb-3">
-              <button onClick={handlePrevClick} className="btn btn-warning">Previous</button>
+              <button onClick={handlePrevClick} className={`btn btn-warning ${(currentShlok <= 1 ) ? 'disabled' : ''}`}>Previous</button>
               {currentShlok && <small className="border px-2 rounded-pill p-1">{`${currentShlok}/${verseTotal}`}</small>}
               <button onClick={handleNextClick} className="btn btn-warning">Next</button>
             </div>
